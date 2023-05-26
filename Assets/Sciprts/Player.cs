@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Novel
@@ -38,6 +39,12 @@ namespace Novel
         {
             // 移動
             rigidbody.velocity = move.normalized * speed;
+        }
+
+        // アクションが終了したとき
+        private void OnActionEnd()
+        {
+            isAction = false;
         }
 
         // 移動の入力を受け取る
@@ -90,7 +97,7 @@ namespace Novel
                 if (action != null)
                 {
                     isAction = true;
-                    action.Action();
+                    action.Action(OnActionEnd);
                 }
             }
         }
