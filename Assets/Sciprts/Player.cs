@@ -13,10 +13,14 @@ namespace Novel
         private new Rigidbody2D rigidbody = null;
         // アニメーションの制御
         private Animator animator = null;
-        // 画像の表示を制御する
+        // 画像の表示を制御
         private SpriteRenderer sprite = null;
         // 移動
         private Vector2 move = new();
+        // アクションがあるオブジェクトを取得する
+        private IEvent action = null;
+        // 会話やアイテムを拾ったときなどのアクション中かどうか
+        private bool isAction = false;
 
         // アニメーションID
         private static readonly int horizontalId = Animator.StringToHash("Horizontal");
@@ -39,6 +43,12 @@ namespace Novel
         // 移動の入力を受け取る
         public void OnMove(InputAction.CallbackContext context)
         {
+            // アクション中なら行動を受け付けない
+            if (isAction)
+            {
+                return;
+            }
+
             move.x = context.ReadValue<Vector2>().x;
             move.y = context.ReadValue<Vector2>().y;
 
@@ -58,7 +68,6 @@ namespace Novel
             {
                 case InputActionPhase.Started:
                 animator.SetBool(isMoveId, true);
-                
                 break;
 
                 case InputActionPhase.Performed:
@@ -69,6 +78,38 @@ namespace Novel
                 case InputActionPhase.Canceled:
                 animator.SetBool(isMoveId, false);
                 break;
+            }
+        }
+
+        // 会話、アイテムの取得の入力を受け取る
+        public void OnAction(InputAction.CallbackContext context)
+        {
+            // 入力したとき
+            if (context.phase == InputActionPhase.Started)
+            {
+                if (action != null)
+                {
+                    isAction = true;
+                    action.Action();
+                }
+            }
+        }
+
+        // 接触開始
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.TryGetComponent(out IEvent action))
+            {
+                this.action = action;
+            }
+        }
+
+        // 接触終了
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.gameObject.TryGetComponent(out IEvent _))
+            {
+                action = null;
             }
         }
     }
