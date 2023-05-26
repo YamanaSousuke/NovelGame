@@ -6,6 +6,7 @@ namespace Novel
     [CreateAssetMenu(menuName = "ScriptableObject/Dialogue", fileName = "DialogueData")]
     public class DialogueTable : ScriptableObject
     {
+        // 1かたまりの会話のデータ
         [SerializeField] private DialogueData[] data = { null};
         public DialogueData[] Data { get => data; }
     }

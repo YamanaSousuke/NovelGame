@@ -537,7 +537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &335159323
 RectTransform:
   m_ObjectHideFlags: 0
@@ -949,7 +949,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1614093322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1129,13 +1129,14 @@ GameObject:
   - component: {fileID: 2060372777}
   - component: {fileID: 2060372776}
   - component: {fileID: 2060372778}
+  - component: {fileID: 2060372779}
   m_Layer: 0
   m_Name: DialogueUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2060372775
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1165,7 +1166,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060372774}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1225,6 +1226,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2060372779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060372774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a41e279efc41740a99a65df3585990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 335159324}
+  messageText: {fileID: 1614093323}
+  dialogueDelay: 0.2
+  interval: 0.03
 --- !u!1 &2093561206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1286,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f19b9fc4198ee941a9a04a73d144253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueUI: {fileID: 2060372774}
-  nameText: {fileID: 335159324}
-  messageText: {fileID: 1614093323}
+  dialogueUI: {fileID: 2060372779}
